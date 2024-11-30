@@ -36,7 +36,7 @@ public class BlogService implements BlogInterface {
         BlogInfo blogInfo = selectBlogById(blogId);
         return BeanConver.trans(blogInfo);
     }
-    /**
+    /**git
      * 从数据库查询博客详情
      * @param blogId
      * @return

@@ -10,4 +10,5 @@ class SpringBootBlogApplicationTests {
 	void contextLoads() {
 	}
 
+
 }
