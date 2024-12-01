@@ -1,4 +1,4 @@
-package com.example.springboot_blog.common.pojo.dataObject;
+package com.example.springboot_blog.common.pojo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

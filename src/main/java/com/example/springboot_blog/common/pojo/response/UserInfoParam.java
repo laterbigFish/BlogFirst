@@ -1,7 +1,6 @@
-package com.example.springboot_blog.common.pojo.dataObject;
+package com.example.springboot_blog.common.pojo.response;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
