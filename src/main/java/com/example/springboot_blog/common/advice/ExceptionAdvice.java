@@ -1,6 +1,7 @@
 package com.example.springboot_blog.common.advice;
 
 
+import com.example.springboot_blog.common.exception.BlogException;
 import com.example.springboot_blog.common.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

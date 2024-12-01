@@ -3,6 +3,8 @@ package com.example.springboot_blog.common.exception;
 import lombok.Data;
 
 @Data
+//自定义异常  在统一异常中进行实现
+
 public class BlogException extends RuntimeException{
     private int code;
     private String message;

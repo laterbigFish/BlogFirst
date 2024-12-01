@@ -9,6 +9,7 @@ import com.example.springboot_blog.common.pojo.response.BlogResponse;
 import com.example.springboot_blog.service.BlogInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,9 @@ public class BlogService implements BlogInterface {
     @Override
     public BlogResponse getBlogDetailById(Integer blogId) {
         BlogInfo blogInfo = selectBlogById(blogId);
+
+        if(blogInfo==null) return null;
+
         return BeanConver.trans(blogInfo);
     }
     /**git

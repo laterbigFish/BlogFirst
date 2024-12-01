@@ -1,6 +1,6 @@
 $(document).ajaxSend(function (e, xhr, opt) {
     let token = localStorage.getItem("user_token");
-    xhr.setRequestHeader("user_header_token", token)
+    xhr.setRequestHeader("user_header_token", user_token);  //设置衣蛾user_header_token这样的头部  将其设置为 user_token
 });
 
 $(document).ajaxError(function(event,xhr,options,exc){

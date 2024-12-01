@@ -9,6 +9,7 @@ public class Result<T> {
     private String message;
     private T data;
 
+
   public static <T> Result<T> success(T Date){
 
       Result result = new Result();
