@@ -13,6 +13,7 @@ import com.example.springboot_blog.common.pojo.response.UserInfoParam;
 import com.example.springboot_blog.common.pojo.response.UserInfoResponse;
 import com.example.springboot_blog.service.UserInterface;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,30 +53,26 @@ public class UserService implements UserInterface {
 
     @Override
     public UserInfoResponse getUserInfo( Integer userId ){
-        UserInfo userInfo = userInfoMapper.selectOne(new LambdaQueryWrapper<UserInfo>()
-                .eq(UserInfo::getId, userId)
-                .eq(UserInfo::getDeleteFlag, 0));
-        if(userInfo==null){
-            log.error("UserInfo is null");
-            return  null;
-        }
-        //不为空进行转换
-        UserInfoResponse userInfoResponse = BeanConver.UserInfoTransUserInfoResponse(userInfo);
+        UserInfoResponse userInfoResponse = new UserInfoResponse();
+        UserInfo userInfo = selectUserInfoById(userId);
+        BeanUtils.copyProperties(userInfo, userInfoResponse);
         return userInfoResponse;
     }
 
     @Override
     public UserInfoResponse getAurhorInfo( Integer blogId ){
+        UserInfoResponse userInfoResponse = new UserInfoResponse();
+//1. 根据博客ID, 获取作者ID
         BlogInfo blogInfo = blogInfoMapper.selectOne(new LambdaQueryWrapper<BlogInfo>()
                 .eq(BlogInfo::getUserId, blogId)
                 .eq(BlogInfo::getDeleteFlag, 0));
-        if(blogInfo==null && blogInfo.getUserId()==null){
-            log.info("博客不存在");
+//2. 根据作者ID, 获取作者信息
+        if (blogInfo == null){
+            throw new BlogException("博客不存在");
         }
-
         UserInfo userInfo = selectUserInfoById(blogInfo.getUserId());
-
-       return  BeanConver.UserInfoTransUserInfoResponse(userInfo);
+        BeanUtils.copyProperties(userInfo, userInfoResponse);
+        return userInfoResponse;
     }
 
     public UserInfo selectUserInfoByName(String userName) {

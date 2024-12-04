@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="css/list.css">
 
 </head>
+
 <body>
     <div class="nav">
         <img src="pic/logo2.jpg" alt="">
@@ -24,7 +26,7 @@
         <div class="left">
             <div class="card">
                 <img src="pic/doge.jpg" alt="">
-                <h3>比特汤老师</h3>
+                <h3></h3>
                 <a href="#">GitHub 地址</a>
                 <div class="row">
                     <span>文章</span>
@@ -37,44 +39,42 @@
             </div>
         </div>
         <div class="right">
-            <!-- <div class="blog">
-                <div class="title">我的第一篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">今天开始, 好好学习Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas nesciunt, hic voluptatum, dolorem quisquam modi accusantium, commodi dolores architecto ratione vel exercitationem optio. Facere repellendus autem, obcaecati dolore sequi incidunt?</div>
-                <a class="detail" href="blog_detail.html">查看全文&gt;&gt;</a>
-            </div>
-            <div class="blog">
-                <div class="title">我的第一篇博客</div>
-                <div class="date">2021-06-02</div>
-                <div class="desc">今天开始, 好好学习Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas nesciunt, hic voluptatum, dolorem quisquam modi accusantium, commodi dolores architecto ratione vel exercitationem optio. Facere repellendus autem, obcaecati dolore sequi incidunt?</div>
-                <a class="detail" href="blog_detail.html">查看全文&gt;&gt;</a>
-            </div> -->
+
         </div>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/common.js"></script>
     <script>
+        getBlogList();
+        function getBlogList() {
+            $.ajax({
+                type: "get",
+                url: "/blog/getList",
+                success: function (result) {
+                    //if else 自己补充
+                    if (result != null && result.code == 200 && result.data != null) {
+                        let finalHtml = "";
+                        for (var blog of result.data) {
+                            finalHtml += '<div class="blog">';
+                            finalHtml += '<div class="title">' + blog.title + '</div>';
+                            finalHtml += '<div class="date">' + blog.createTime + '</div>';
+                            finalHtml += '<div class="desc">' + blog.content + '</div>';
+                            finalHtml += '<a class="detail" href="blog_detail.html?blogId=' + blog.id + '">查看全文&gt;&gt;</a>';
+                            finalHtml += '</div>';
+                        }
+                        // console.log(blog.id);
+                        // console.log(finalHtml);
 
-        $.ajax({
-            type: "get",
-            url: "/blog/getList",
-            success: function(result){
-                //if else 自己补充
-                if(result!=null && result.code==200 && result.data!=null){
-                    let finalHtml = "";
-                    for(var blog of result.data){
-                        finalHtml +='<div class="blog">';
-                        finalHtml +='<div class="title">'+blog.title+'</div>';
-                        finalHtml +='<div class="date">'+blog.createTime+'</div>';
-                        finalHtml +='<div class="desc">'+blog.content+'</div>';
-                        finalHtml +='<a class="detail" href="blog_detail.html?blogId='+blog.id+'">查看全文&gt;&gt;</a>';
-                        finalHtml +='</div>';
+                        $(".right").html(finalHtml);
                     }
-
-                    $(".right").html(finalHtml);
                 }
-            }
-        });
+            });
+        }
+        //获取用户信息
+        let url = "/user/getUserInfo?userId=" + localStorage.getItem("login_user_id");
+        getUserInfo(url);
+
     </script>
 </body>
+
 </html>

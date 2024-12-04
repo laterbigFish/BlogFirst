@@ -1,6 +1,7 @@
 package com.example.springboot_blog.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.springboot_blog.common.pojo.Request.BlogUpdateParam;
 import com.example.springboot_blog.common.pojo.dataObject.BlogInfo;
 import org.apache.ibatis.annotations.Mapper;
 

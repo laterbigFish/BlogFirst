@@ -35,6 +35,7 @@ public class UserController {
 
     @RequestMapping("/getAuthorInfo")
     public UserInfoResponse getAuthorInfo( @NotNull Integer blogId){
+
         return userInterface.getAurhorInfo(blogId);
     }
 }

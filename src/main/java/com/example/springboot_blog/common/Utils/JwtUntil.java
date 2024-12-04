@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Slf4j
 public class JwtUntil {
-    private static final String secret = "hTwpNhZ0qFVXz4fwG93i0SXTm2TtFm+afXzasChE87g=";
+    private static final String secret = "5m92Z8WZ8ikJ3Nph62TU4DVCCDxuZ1s6gHQoEvW43TY=";
 
     private static final Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
@@ -35,7 +35,7 @@ public class JwtUntil {
     public static Claims parseToken(String token){
 
         JwtParser build = Jwts.parserBuilder().setSigningKey(key).build();
-        log.info("********"+token);
+        log.info("获取的token值为"+token);
         Claims body = null;
         try {
             body = build.parseClaimsJws(token).getBody();

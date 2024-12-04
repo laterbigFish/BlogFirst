@@ -1,6 +1,6 @@
 $(document).ajaxSend(function (e, xhr, opt) {
     let token = localStorage.getItem("user_token");
-    xhr.setRequestHeader("user_header_token", user_token);  //设置衣蛾user_header_token这样的头部  将其设置为 user_token
+    xhr.setRequestHeader("user_header_token", token)
 });
 
 $(document).ajaxError(function(event,xhr,options,exc){
@@ -13,3 +13,30 @@ $(document).ajaxError(function(event,xhr,options,exc){
         //TODO
     }
 });
+
+
+function getUserInfo(url){
+    $.ajax({
+        type: "get",
+        url: url,
+        success: function(result){
+            if(result!=null && result.code==200 && result.data!=null){
+                let userInfo = result.data;
+                $(".card h3").text(userInfo.userName);
+                $(".card a").attr("href", userInfo.githubUrl);
+            }else{
+                //自行补充
+            }
+        }
+    });
+}
+
+function logout(){
+    let logout = confirm("是否确认退出");
+    if(logout){
+        localStorage.removeItem("user_token");
+        localStorage.removeItem("login_user_id");
+        location.href = "blog_login.html";
+    }
+    
+}

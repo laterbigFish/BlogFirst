@@ -48,6 +48,7 @@ public class JwtTest {
         //jwt解析器
 
         JwtParser build = Jwts.parserBuilder().setSigningKey(key).build();
+
         try {
             Object body = build.parse(token).getBody();
             System.out.println(body);
@@ -65,8 +66,5 @@ public class JwtTest {
         SecretKey secretKey  = Keys.secretKeyFor(SignatureAlgorithm.HS256);  //拿到一个secret 但还需要将其转化为字符串
         String encode = Encoders.BASE64.encode(secretKey.getEncoded());
         System.out.println(encode);
-//        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-//        String encode = Encoders.BASE64.encode(secretKey.getEncoded());
-//        System.out.println(encode);
     }
 }
